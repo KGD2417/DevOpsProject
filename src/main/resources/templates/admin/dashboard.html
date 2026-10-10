@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout::layout}">...</head>
+<body>
+<div class="container mt-5">
+    <h2>Dashboard</h2>
+    
+    <div class="row">
+        <!-- Total Complaints Card -->
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-white bg-primary o-1-hover">
+                <div class="card-body">
+                    <h5 class="card-title">Total Complaints</h5>
+                    <p class="card-text" th:text="${totalComplaints}">0</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Open Complaints Card -->
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-white bg-warning o-1-hover">
+                <div class="card-body">
+                    <h5 class="card-title">Open Complaints</h5>
+                    <p class="card-text" th:text="${openComplaints}">0</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Assigned Complaints Card -->
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-white bg-info o-1-hover">
+                <div class="card-body">
+                    <h5 class="card-title">Assigned Complaints</h5>
+                    <p class="card-text" th:text="${assignedComplaints}">0</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- In Progress Card -->
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-white bg-success o-1-hover">
+                <div class="card-body">
+                    <h5 class="card-title">In Progress</h5>
+                    <p class="card-text" th:text="${inProgress}">0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr/>
+    
+    <div class="row">
+        <!-- Resolved Complaints Card -->
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-white bg-success o-1-hover">
+                <div class="card-body">
+                    <h5 class="card-title">Resolved Complaints</h5>
+                    <p class="card-text" th:text="${resolvedComplaints}">0</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- High Priority Card -->
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-white bg-danger o-1-hover">
+                <div class="card-body">
+                    <h5 class="card-title">High Priority + Emergency</h5>
+                    <p class="card-text" th:text="${highPriority}">0</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resolution Rate Card -->
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-white bg-secondary o-1-hover">
+                <div class="card-body">
+                    <h5 class="card-title">Resolution Rate</h5>
+                    <p class="card-text" th:text="${resolutionRate}%">0%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr/>
+    
+    <div class="row">
+        <!-- Recent Complaints -->
+        <div class="col-12">
+            <h5>Recent Complaints</h5>
+            <div class="table-responsive">
+                <table class="table table-sm table-borderless mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th><th>Complaint ID</th><th>Street</th><th>Status</th><th>Priority</th><th>Reported</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="complaint, i : ${recentComplaints}">
+                            <td th:text="${i.index + 1}">1</td>
+                            <td><a th:text="${complaint.complaintId}" th:href="@{/complaints/{complaintId}(*{id}=${complaint.id})}"></a></td>
+                            <td th:text="${complaint.streetName}"></td>
+                            <td><span class="badge bg-primary" th:text="${complaint.status}"></span></td>
+                            <td th:text="${complaint.priority}"></td>
+                            <td th:text="${complaint.createdAt}"></td>
+                        </tr>
+                        <tr th:if="${recentComplaints.isEmpty()}">
+                            <td colspan="6" class="text-center text-muted">No complaints yet</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
