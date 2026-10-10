@@ -1,0 +1,35 @@
+# Maven
+.target
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/download-maven.ps1
+**/pom.xml.effective
+
+# Local configuration
+.env
+local-settings.xml
+
+# Build output
+target/
+.build.json
+
+# Database
+*.db
+*.sqlite
+
+# IDE
+.idea/
+*.iml
+/.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerinit
+docker-compose.override.yml
+
+# Secrets (never commit!)
+*.key
+*.pem
+*.env  # Note: .env.example is committed with placeholders

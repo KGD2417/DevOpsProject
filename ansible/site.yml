@@ -1,0 +1,43 @@
+- name: Configure System Packages and Directories
+  hosts: streetlight-app
+  become: yes
+  tags: [system, packages]
+
+  roles:
+    - system
+
+- name: Install and Configure Docker
+  hosts: streetlight-app
+  become: yes
+  tags: [docker, docker-install]
+
+  roles:
+    - docker
+
+- name: Deploy Application
+  hosts: streetlight-app
+  become: yes
+  tags: [application, deploy]
+
+  roles:
+    - application
+
+- name: Verify Health and Idempotency
+  hosts: streetlight-app
+  become: yes
+  tags: [health, verify]
+
+  tasks:
+    - name: Run health check endpoint
+      ansible.builtin.command: curl -f http://localhost:8080/actuator/health
+      register: health_check
+      failed_when: health_check.rc != 0
+      changed_when: false
+
+    - name: Display health check result
+      ansible.builtin.debug:
+        msg: "Application health: {{ 'UP' if health_check is success else 'DOWN' }}"
+
+    - name: Verify idempotency (second run note)
+      ansible.builtin.debug:
+        msg: "Idempotency: Second run should produce no unnecessary changes (changed=0)"

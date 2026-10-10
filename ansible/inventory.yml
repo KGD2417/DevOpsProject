@@ -1,0 +1,7 @@
+# inventory.yml - Target host configuration
+
+[streetlight-app]
+target-host ansible_host=192.168.1.50 ansible_user=deploy ansible_ssh_pass=CHANGE_ME
+
+[streetlight-app:vars]
+ansible_python_interpreter=/usr/bin/python3

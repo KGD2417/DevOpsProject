@@ -1,0 +1,29 @@
+# vars.yml - Variable values (placeholder values, not secrets)
+
+# DATABASE CONFIGURATION
+db_host: localhost
+db_port: "3306"
+db_name: streetlight
+db_user: streetlight
+db_password: CHANGE_ME_PRODUCTION  # <-- placeholder, not real password
+
+# APPLICATION CONFIGURATION
+app_name: streetlight-fault-reporting
+app_url: http://localhost:8080
+server_port: 8080
+
+# DOCKER CONFIGURATION
+docker_image: streetlight/fault-reporting
+docker_tag: dev
+docker_compose_file: docker-compose.yml
+
+# NGINX CONFIGURATION
+nginx_port: 80
+nginx_https_port: 443
+nginx_domain: localhost
+
+# SECURITY - PLACEHOLDERS ONLY
+bcrypt_strength: 10
+
+# ANALYTICS / METRICS
+resolution_rate_metric: false
